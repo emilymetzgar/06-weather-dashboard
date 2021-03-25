@@ -1,17 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='./assets/css/style.css'
-/>
-    <title>Document</title>
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href='./assets/css/style.css' />
+  <title>Weather Dashboard</title>
 </head>
+
 <body>
-    <h1>Hello World</h1>
+
+  <div class="container">
+
+    <h1>Weather Dashboard</h1>
+
+    <div class="weather-dashboard row">
+
+      <div class="form-inputs col-3">
+
+        <form id="search">
+
+          <h2> Search for a City:</h2>
+
+          <input type="text" name="city" placeholder="Search Cities" />
+
+          <button type="submit" class="col-2 bg-primary btn"><i class="fa fa-search"></i> </button>
+
+        </form>
+
+        <div class="history col-1">
+
+          <div id="old-searches">
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="weather-info col-9">
+
+        <div class="today" id="today">
+
+          <h3>Today's Weather</h3>
+
+        </div>
+
+        <h3>5 Day Forecast</h3>
+
+        <div class="forecast row  bg-primary m-2" id="forecast">
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script src='./assets/js/script.js'></script>
+
 </body>
+
 </html>
