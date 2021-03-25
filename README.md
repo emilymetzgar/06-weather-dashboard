@@ -11,9 +11,9 @@ Runs in the browser and features HTML, CSS, bootstrap, and is powered by Javascr
 
 Organizes weather data to allow users to search for a particular city and view weather to plan trips accordingly. 
 
-![A screenshot of the application](./assets/images/screenshot.gif)
+![A screenshot of the application](./assets/images/screenshot.PNG)
 
-link to application: https://emilymetzgar.github.io/05-work-day-scheduler/
+link to application: https://emilymetzgar.github.io/06-weather-dashboard/
 
 ## Credits
 
