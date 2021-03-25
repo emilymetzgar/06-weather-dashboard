@@ -29,7 +29,8 @@ $(document).ready(function () {
         historyContainer.append(searchDiv);
 
 
-        //actual data retreived from user in form
+        //actual data retreived from user in form to run search functions 
+        //for todays weather and 5 day forecast
         searchWeather(cities);
         searchForecast(cities);
 
@@ -144,6 +145,12 @@ $(document).ready(function () {
                 var searchDiv = $('<button type = "button" class= "btn search-div">');
                 searchDiv.click(function(event) {
                     event.preventDefault();
+                    var $this = $(event.target);
+                    var city = $this.text();
+
+                    searchWeather(city);
+                    searchForecast(city);
+                   
                 });
                 searchDiv.text(historySearches[i]);
                 historyContainer.append(searchDiv);
