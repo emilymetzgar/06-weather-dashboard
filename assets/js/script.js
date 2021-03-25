@@ -113,9 +113,18 @@ $(document).ready(function () {
                     rows.append(windyDiv);
                     forecastContainer.append(rows);
                 }
+               
             }
+         
         });
-    }
+    
+        function clearResults() {
+            $('#forecast').html('');
+            $('#today').html('');
+        }
+
+
+
 
     function getUVI(lat, lon) {
     //lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid={API key}
@@ -144,4 +153,9 @@ $(document).ready(function () {
     }
   
     getHistorySearches();
+    clearResults();
+
+}
+
+   
 });
