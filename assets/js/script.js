@@ -13,7 +13,6 @@ $(document).ready(function () {
     // when a user searches for a city, run this function
     formSearch.submit(function (event) {
         event.preventDefault();
-
         // this = this form that was submitted
         var values = $(this).serializeArray();
         var cities = values[0].value;
@@ -26,26 +25,21 @@ $(document).ready(function () {
         localStorage.setItem('historySearches', JSON.stringify(historySearches));
         searchDiv.text(cities);
         //historyContainer.append(searchDiv);
-
-        //actual data retreived from user in form to run search functions 
+        //actual data retreived from user in form to run search functions
         //for todays weather and 5 day forecast
         searchWeather(cities);
         searchForecast(cities);
-
     });
     //function to search weather data based on city
-    //fetches url 
+    //fetches url
     function searchWeather(cities) {
         var wholeUrl = baseUrl + "q=" + cities + "&appid=" + apiKey;
-
         fetch(wholeUrl)
             //then JSON
-
             .then(function (response) {
                 return response.json();
             }) //and then fetch data with specific data
             .then(function (data) {
-
                 var wind = data.wind;
                 var humid = data.main.humidity;
                 var citiesNames = data.name;
@@ -67,7 +61,6 @@ $(document).ready(function () {
                 todayContainer.append(tempsDiv); //append to today container on html
                 todayContainer.append(humidDiv); //append to today container on html
                 todayContainer.append(windyDiv); //append to today container on html
-
             });
     }
     //search future weather, 5 day forecast
@@ -80,7 +73,7 @@ $(document).ready(function () {
             var coordinates = data.city.coord;
             getUVI(coordinates.lat, coordinates.lon);
 
-             //update at specific time and use moment for date
+ //update at specific time and use moment for date
             for (var i = 0; i < data.list.length; i++) {
                 var timeThreeOClock = data.list[i].dt_txt.search('15:00:00');
                 var cityName = data.city.name;
@@ -101,8 +94,8 @@ $(document).ready(function () {
                     var windyDiv = $("<div class = 'display-windy'>");
                     var weatherImg = $("<img class = 'icon-name' />")
                     weatherImg.attr('src', iconUrlArr)//weather icon
-                    //use the html spaces and the varaibles that fill with 
-                    //specific data from API to show on page, 
+                    //use the html spaces and the varaibles that fill with
+                    //specific data from API to show on page,
                     //depending on city search
                     dayDiv.text(day);
                     tempsDiv.text("Temperature: " + temp);
@@ -117,12 +110,7 @@ $(document).ready(function () {
                 }
             }
         });
-        //function to clear results to keep from city searches data piling up
-        function clearResults() {
-            $('#forecast').html('');
-            $('#today').html('');
-        }
-
+        
         function getUVI(lat, lon) {
             //lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid={API key}
             var UviURL = baseUviURL + 'lat=' + lat + '&lon=' + lon + '&exclude=hourly,daily&appid=' + apiKey;
@@ -132,30 +120,34 @@ $(document).ready(function () {
                 var uviInfo = data.current.uvi;
                 todayContainer.append("UV Index: " + uviInfo);
             });
-        } //store in local storage, get from local storage, display on html
-        function getHistorySearches() {
-            if (localStorage.getItem('historySearches')) {
-                historySearches = JSON.parse(localStorage.getItem('historySearches'));
-                $('#old-searches').html('');
-                //for loop for history of city weather searches
-                for (var i = 0; i < historySearches.length; i++) {
-                    var searchDiv = $('<button type = "button" class= "btn search-div">');
-                    searchDiv.click(function (event) {
-                        event.preventDefault();
-                        var $this = $(event.target);//take the text from the history search button that is clicked, and replace the data on screen
-                        var city = $this.text();
-                        searchWeather(city);
-                        searchForecast(city);
-
-                    });
-                    searchDiv.text(historySearches[i]);//grab and display info from local storage
-                    historyContainer.append(searchDiv);
-
-                }
-            }
-        }
-        //run these functions at the very end
+        } 
+        
         getHistorySearches();
         clearResults();
     }
-});
+    function clearResults() {
+        $('#forecast').html('');
+        $('#today').html('');
+    }
+    function getHistorySearches() {
+        if (localStorage.getItem('historySearches')) {
+            historySearches = JSON.parse(localStorage.getItem('historySearches'));
+            $('#old-searches').html('');
+            //for loop for history of city weather searches
+            for (var i = 0; i < historySearches.length; i++) {
+                var searchDiv = $('<button type = "button" class= "btn search-div">');
+                searchDiv.click(function (event) {
+                    event.preventDefault();
+                    var $this = $(event.target);//take the text from the history search button that is clicked, and replace the data on screen
+                    var city = $this.text();
+                    searchWeather(city);
+                    searchForecast(city);
+                });
+                searchDiv.text(historySearches[i]);//grab and display info from local storage
+                historyContainer.append(searchDiv);
+            }
+        }
+    }
+    getHistorySearches();
+    clearResults();
+ });
